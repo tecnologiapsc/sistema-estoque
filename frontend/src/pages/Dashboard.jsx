@@ -1,13 +1,20 @@
+import { useState } from 'react';
+
 import Sidebar from "../components/layout/Sidebar";
 import Navbar from "../components/layout/Navbar";
 
 import Card from "../components/ui/Card";
+import Modal from '../components/ui/Modal';
 
 import ProductForm from "../components/forms/ProductForm";
 import ProductTable from "../components/tables/ProductTable";
 
 
 export default function Dashboard() {
+
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
+    
     return (
         
         <div className="flex">
@@ -34,7 +41,29 @@ export default function Dashboard() {
 
                         <Card>
 
+                            <button
+                                onClick={() => setIsModalOpen(true)}
+                                className="
+                                    bg-blue-600
+                                    text-white
+                                    px-4
+                                    py-2
+                                    rounded
+                                    mb-4
+                                " >
+                            </button>
+
                             <ProductTable />
+
+                            <Modal
+                                isOpen={isModalOpen}
+                                title="Novo Produto"
+                                onClose={() => setIsModalOpen(false)}
+                            >
+
+                                <ProductForm />
+
+                            </Modal>
                             
                         </Card>
 
