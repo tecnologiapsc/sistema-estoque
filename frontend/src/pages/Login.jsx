@@ -1,62 +1,44 @@
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
 
-import Input from '../components/ui/Input';
-import Button from '../components/ui/Button';
-
+import api from "../services/api";
 
 export default function Login() {
-    const navigate = useNavigate()
 
-    function handleLogin() {
+    const [email,setEmail] useState('')
+
+    async function handleLogin() {
+
+        const response = await api.post('/login', {
+            email
+        })
 
         localStorage.setItem(
             'token',
-            'TOKEN_EXEMPLO'
+            response.data.token
         )
 
-        navigate('/Dashboard')
+        alert('Login realizado')
     }
 
     return (
-        <div className="
-            h-screen
-            bg-gray-100
-            flex
-            items-center
-            justfy-center        
-        ">
 
-            <div className="
-                gb-white
-                p-8
-                rounded
-                shadow-md
-                w-96            
-            ">
+        <div className="p-10">
+            
+            <h1 className="text-3xl mb-5">
+                Login
+            </h1>
 
-                <h1 className='
-                    text-2x1
-                    font-bold
-                    m-6
-                    text-center
-                '>
+            <input
+                type="text"
+                placeholder="Digite seu email"
+                onChange={e => setEmail(e.target.value)}
+            />
 
-                    Sistema ERP
-
-                </h1>
-
-                <Input
-                    type="password"
-                    placeholder="Senha" 
-                />
-
-                <Button
-                    title="Entrar"
-                    onClick={handleLogin} 
-                />
-
-            </div>
+            <button onClick={handleLogin}>
+                Entrar
+            </button>
 
         </div>
+
     )
 }
