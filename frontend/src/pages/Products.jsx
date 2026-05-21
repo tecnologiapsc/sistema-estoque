@@ -4,7 +4,6 @@ import api from '../services/api';
 
 import MainLayout from '../layouts/MainLayout';
 
-
 export default function Products() {
 
     const [products, setProducts] = useState([])
@@ -15,22 +14,20 @@ export default function Products() {
 
         const response = await api.get('/products', {
             headers: {
-                Authorization: 'Bearer ${token}'
+                Authorization: `Bearer ${token}`
             }
         })
 
         setProducts(response.data)
     }
 
-    useEffect(() => {
-        loadProducts()
-    }, [])
+    useEffect(() => { loadProducts() }, [])
 
     return (
 
         <MainLayout>
 
-            <h1 className="text-3xl font- bold mb-5">
+            <h1 className="text-3xl font-bold mb-5">
                 Produtos
             </h1>
 
@@ -43,13 +40,15 @@ export default function Products() {
                         <th>Nome</th>
                         <th>Estoque</th>
                         <th>Preço</th>
+
                     </tr>
 
                 </thead>
 
                 <tbody>
 
-                    {products.map(product =>(
+                    {products.map(product => (
+
                         <tr key={product.id}>
 
                             <td>{product.name}</td>
@@ -57,6 +56,7 @@ export default function Products() {
                             <td>{product.price}</td>
 
                         </tr>
+
                     ))}
 
                 </tbody>

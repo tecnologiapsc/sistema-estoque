@@ -4,7 +4,7 @@ import api from "../services/api";
 
 export default function Login() {
 
-    const [email,setEmail] useState('')
+    const [email, setEmail] = useState('')
 
     async function handleLogin() {
 
@@ -30,6 +30,7 @@ export default function Login() {
 
             <input
                 type="text"
+                value={email}
                 placeholder="Digite seu email"
                 onChange={e => setEmail(e.target.value)}
             />
