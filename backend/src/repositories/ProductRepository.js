@@ -22,6 +22,28 @@ class ProductRepository {
             [name, stock, price]
         )
     }
+
+    async update(id, {
+        name, 
+        stock, 
+        price
+
+    }) {
+
+        await db.query(
+            'UPDADTE products SET name = $1, stock= $2, price= $3 WHERE id = $4',
+            [name, stock, price, id]
+        )
+    }
+
+    async delete(id) {
+
+        await db.query(
+            ' DELETE FROM products WHERE id = $1',
+        [id]
+        )
+        
+    }
 }
 
 module.exports = new ProductRepository()

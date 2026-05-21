@@ -28,6 +28,31 @@ class ProductController {
             message: 'Produto criado'
         })
     }
+
+    async update(req, res) {
+
+        const { id } = req.params
+
+        await ProductRepository.update(
+            id,
+            req.body
+        )
+
+        return res.json({
+            message: 'Atualizado'
+        })
+    }
+
+    async delete(req, res) {
+
+        const { id } = req.params
+
+        await ProductRepository.delete(id)
+
+        return res.json({
+            message: 'Excluído'
+        })
+    }
 }
 
 module.exports = new ProductController()
