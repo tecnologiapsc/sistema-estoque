@@ -1,24 +1,25 @@
+import { Link } from "react-router-dom";
+
 export default function Sidebar() {
+
     return (
-        <div className="w-64 h-screen bg-gray-900 text-white p-4
-        ">
-            <h1 className="text-2x1 font-bold mb-10">
+        <div className="w-64 h-screen bg-gray-900 text-white p-5">
+
+            <h1 className="text-2xl mb-10">
                 ERP System
             </h1>
 
-            <ul className="space-y-4">
-                <li className="hover:text-blue-400 cursor-pointer">
+            <nav className="flex flex-col gap-4">
+
+                <Link to="/">
                     Dashboard
-                </li>
+                </Link>
 
-                <li className="hover:text-blue-400 cursor-pointer">
+                <Link to="/products">
                     Produtos
-                </li>
+                </Link>
 
-                <li className="hover:text-blue-400 cursor-pointer">
-                    Usuários
-                </li>
-            </ul>
+            </nav>
 
         </div>
     )
