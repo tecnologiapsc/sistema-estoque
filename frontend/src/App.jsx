@@ -1,8 +1,15 @@
-import AppRoutes from "./routes";
+export default function App() {
 
+    return (
 
-function App() {
-    return <AppRoutes />
+        <div>
+
+            <h1>
+                SISTEMA FUNCIONANDO
+            </h1>
+
+        </div>
+
+    );
+
 }
-
-export default App

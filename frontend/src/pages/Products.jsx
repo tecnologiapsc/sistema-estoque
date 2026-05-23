@@ -1,68 +1,105 @@
 import { useEffect, useState } from "react";
 
-import api from '../services/api';
+import api from "../services/api";
 
 import MainLayout from '../layouts/MainLayout';
 
 export default function Products() {
 
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
 
     async function loadProducts() {
 
-        const token = localStorage.getItem('token')
+        try {
 
-        const response = await api.get('/products', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+            const token = localStorage.getItem("token");
 
-        setProducts(response.data)
+            const response = await api.get("/products", {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+
+            setProducts(response.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert("Erro ao carregar produtos");
+
+        }
+
     }
 
-    useEffect(() => { loadProducts() }, [])
+    useEffect(() => {
+
+        loadProducts();
+
+    }, []);
 
     return (
 
         <MainLayout>
 
-            <h1 className="text-3xl font-bold mb-5">
-                Produtos
-            </h1>
+            <div className="bg-white p-5 rounded shadow">
 
-            <table className="w-full">
+                <h1 className="text-3xl font-bold mb-5">
+                    Produtos
+                </h1>
 
-                <thead>
+                <table className="w-full border-collapse border border-gray-300">
 
-                    <tr>
+                    <thead>
 
-                        <th>Nome</th>
-                        <th>Estoque</th>
-                        <th>Preço</th>
+                        <tr className="bg-gray-200">
 
-                    </tr>
+                            <th className="border p-2 text-left">
+                                Nome
+                            </th>
 
-                </thead>
+                            <th className="border p-2 text-left">
+                                Estoque
+                            </th>
 
-                <tbody>
-
-                    {products.map(product => (
-
-                        <tr key={product.id}>
-
-                            <td>{product.name}</td>
-                            <td>{product.stock}</td>
-                            <td>{product.price}</td>
+                            <th className="border p-2 text-left">
+                                Preço
+                            </th>
 
                         </tr>
 
-                    ))}
+                    </thead>
 
-                </tbody>
+                    <tbody>
 
-            </table>
+                        {products.map((product) => (
+
+                            <tr key={product.id}>
+
+                                <td className="border p-2">
+                                    {product.name}
+                                </td>
+
+                                <td className="border p-2">
+                                    {product.stock}
+                                </td>
+
+                                <td className="border p-2">
+                                    R$ {product.price}
+                                </td>
+
+                            </tr>
+
+                        ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </MainLayout>
-    )
+
+    );
+
 }
